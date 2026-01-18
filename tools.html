@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools & Dataset - Smart Credit Risk System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Smart Credit Risk System</h1>
+            <p>ML Documentation</p>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="backend.html">⚙️ Backend Walkthrough</a></li>
+            <li><a href="app-explanation.html">📝 app.py Explanation</a></li>
+            <li><a href="notebook-explanation.html">📓 Notebook Explanation</a></li>
+      
+            <li><a href="train-model-explanation.html">🤖 train_model.py</a></li>
+            <li><a href="shrink-model-explanation.html">🗜️ shrink_model.py</a></li>
+            <li><a href="interface.html">💻 Interface & Deployment</a></li>
+            <li><a href="tools.html" class="active">🛠️ Tools & Dataset</a></li>
+            <li><a href="faq.html">❓ FAQ & Interview Q&A</a></li>
+        </ul>
+    </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Tools & Dataset</h1>
+            <p>Technologies, libraries, and data used to build the Smart Credit Risk System</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Tools Used</h2>
+            <p>
+                Building a Machine Learning web application requires various tools and technologies. Here's what we used 
+                for this project:
+            </p>
+
+            <div class="highlight-box">
+                <h3>Programming & Development</h3>
+                <ul>
+                    <li>
+                        <strong>Python:</strong> The main programming language. Python is perfect for Machine Learning 
+                        because it has excellent libraries and is easy to read and write.
+                    </li>
+                    <li>
+                        <strong>VS Code:</strong> Visual Studio Code is our code editor. It helps us write, debug, and 
+                        organize our code with features like syntax highlighting and extensions.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Web Framework & Server</h3>
+                <ul>
+                    <li>
+                        <strong>Flask:</strong> A lightweight Python web framework. Flask makes it easy to create web 
+                        applications and APIs. It's simple to learn but powerful enough for production use.
+                    </li>
+                    <li>
+                        <strong>Gunicorn:</strong> A production-ready web server for Python applications. While Flask 
+                        has a built-in development server, Gunicorn is needed for deploying to production platforms 
+                        like Render.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Machine Learning Libraries</h3>
+                <ul>
+                    <li>
+                        <strong>Scikit-learn:</strong> One of the most popular Machine Learning libraries in Python. 
+                        It provides our Random Forest Classifier, data preprocessing tools (imputers, scalers, encoders), 
+                        and pipeline functionality.
+                    </li>
+                    <li>
+                        <strong>Pandas:</strong> A powerful library for data manipulation and analysis. We use it to 
+                        organize user input into DataFrames (like Excel spreadsheets) that our model can understand.
+                    </li>
+                    <li>
+                        <strong>Joblib:</strong> A library for saving and loading Python objects efficiently. We use it 
+                        to save our trained model and load it in the Flask app without retraining.
+                    </li>
+                    <li>
+                        <strong>NumPy:</strong> A fundamental library for numerical computing. It's a dependency for 
+                        scikit-learn and pandas, handling all the mathematical operations behind the scenes.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Deployment & Version Control</h3>
+                <ul>
+                    <li>
+                        <strong>GitHub:</strong> A platform for storing and sharing code. We use it to version control 
+                        our project, track changes, and collaborate. It also integrates with deployment platforms.
+                    </li>
+                    <li>
+                        <strong>Render:</strong> A cloud platform for deploying web applications. Render automatically 
+                        builds and deploys our Flask app from GitHub, making it accessible to users worldwide via a URL.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-section" style="margin-top: 2rem;">
+                <h3>Technology Stack Summary</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                    <span class="badge">Python</span>
+                    <span class="badge">Flask</span>
+                    <span class="badge">Scikit-learn</span>
+                    <span class="badge">Pandas</span>
+                    <span class="badge">Joblib</span>
+                    <span class="badge">Gunicorn</span>
+                    <span class="badge">VS Code</span>
+                    <span class="badge">GitHub</span>
+                    <span class="badge">Render</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Dataset</h2>
+            <p>
+                Our Smart Credit Risk System was trained on the <strong>Credit Risk Dataset</strong> from Kaggle. 
+                This dataset contains real-world loan application information and outcomes, making it perfect for 
+                training a credit risk prediction model.
+            </p>
+
+            <h3>Dataset Source</h3>
+            <div class="info-box">
+                <p>
+                    <strong>Platform:</strong> Kaggle<br>
+                    <strong>Dataset Name:</strong> Credit Risk Dataset<br>
+                    <strong>Type:</strong> Structured tabular data (CSV format)
+                </p>
+            </div>
+
+            <h3>Main Features in the Dataset</h3>
+            <p>
+                The dataset includes various features (columns) that describe loan applicants and their loan details:
+            </p>
+            <ul>
+                <li>
+                    <strong>Age:</strong> The applicant's age in years
+                </li>
+                <li>
+                    <strong>Person Income:</strong> The applicant's annual income in dollars
+                </li>
+                <li>
+                    <strong>Loan Amount:</strong> The total amount of money requested for the loan
+                </li>
+                <li>
+                    <strong>Loan Interest Rate:</strong> The annual interest rate percentage for the loan
+                </li>
+                <li>
+                    <strong>Loan Intent:</strong> The purpose of the loan (e.g., "Home Improvement", "Debt Consolidation", 
+                    "Medical", "Personal", "Venture", "Education")
+                </li>
+                <li>
+                    <strong>Employment Length:</strong> How long the person has been employed (in years)
+                </li>
+                <li>
+                    <strong>Home Ownership:</strong> Whether the person owns a home, rents, or has a mortgage
+                </li>
+                <li>
+                    <strong>Previous Default:</strong> Whether the person has defaulted on a loan before (Yes/No)
+                </li>
+                <li>
+                    <strong>Credit History Length:</strong> How long the person's credit history is (in years)
+                </li>
+            </ul>
+
+            <h3>Target Variable</h3>
+            <p>
+                The dataset also includes the <strong>loan_status</strong> column, which tells us whether each loan 
+                applicant actually defaulted (didn't pay back) or paid back successfully. This is what we're trying 
+                to predict for new applicants!
+            </p>
+            <ul>
+                <li><strong>0:</strong> Loan was paid back successfully (SAFE)</li>
+                <li><strong>1:</strong> Loan defaulted (RISKY)</li>
+            </ul>
+
+            <h3>Why This Dataset?</h3>
+            <p>
+                This dataset is ideal for our project because:
+            </p>
+            <ul>
+                <li>It contains real-world financial data, making our model practical and relevant</li>
+                <li>It has a good mix of numerical features (age, income) and categorical features (loan intent, home ownership)</li>
+                <li>It's large enough to train a robust model but manageable in size</li>
+                <li>It's publicly available and well-documented on Kaggle</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h3>📊 Data Preprocessing</h3>
+                <p>
+                    Before training, the data goes through preprocessing steps:
+                </p>
+                <ul>
+                    <li><strong>Handling Missing Values:</strong> Some applications might have missing information, which we fill in</li>
+                    <li><strong>Scaling:</strong> Numerical features are normalized to the same scale</li>
+                    <li><strong>Encoding:</strong> Categorical features (like "Home Improvement") are converted to numbers</li>
+                    <li><strong>Feature Engineering:</strong> We calculate derived features like interest_burden</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Project Architecture</h2>
+            <p>
+                Here's how all these tools work together:
+            </p>
+            <div class="info-box">
+                <ol>
+                    <li><strong>Data Collection:</strong> Download Credit Risk Dataset from Kaggle</li>
+                    <li><strong>Model Training:</strong> Use Python, Scikit-learn, and Pandas to train Random Forest model</li>
+                    <li><strong>Model Saving:</strong> Use Joblib to save the trained model</li>
+                    <li><strong>Web Development:</strong> Use Flask to create the web application</li>
+                    <li><strong>Frontend:</strong> Create HTML/CSS interface for user interaction</li>
+                    <li><strong>Version Control:</strong> Store code on GitHub</li>
+                    <li><strong>Deployment:</strong> Deploy to Render using Gunicorn</li>
+                    <li><strong>Result:</strong> Live web application accessible to users!</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Connect With Me</h3>
+            <p>Follow me on social media for more projects and updates</p>
+            <div class="social-links">
+                <a href="https://github.com/Tegnh" target="_blank" class="social-link github" title="GitHub">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://x.com/6ar_t" target="_blank" class="social-link twitter" title="Twitter/X">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/tarig-fdl-7a6599348/" target="_blank" class="social-link linkedin" title="LinkedIn">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Smart Credit Risk System. Built with ❤️ by Tegnh</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

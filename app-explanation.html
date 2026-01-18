@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>app.py Code Explanation - Smart Credit Risk System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Smart Credit Risk System</h1>
+            <p>ML Documentation</p>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="backend.html">⚙️ Backend Walkthrough</a></li>
+            <li><a href="app-explanation.html" class="active">📝 app.py Explanation</a></li>
+            <li><a href="notebook-explanation.html">📓 Notebook Explanation</a></li>
+          
+            <li><a href="train-model-explanation.html">🤖 train_model.py</a></li>
+            <li><a href="shrink-model-explanation.html">🗜️ shrink_model.py</a></li>
+            <li><a href="interface.html">💻 Interface & Deployment</a></li>
+            <li><a href="tools.html">🛠️ Tools & Dataset</a></li>
+            <li><a href="faq.html">❓ FAQ & Interview Q&A</a></li>
+        </ul>
+    </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Complete app.py Code Explanation</h1>
+            <p>A detailed, step-by-step walkthrough of the Flask backend code that powers our Smart Credit Risk System</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="content-section">
+            <h2>📚 Table of Contents</h2>
+            <ul style="columns: 2; column-gap: 2rem;">
+                <li><a href="#imports" style="color: var(--navy-blue); text-decoration: none;">1. Library Imports</a></li>
+                <li><a href="#initialization" style="color: var(--navy-blue); text-decoration: none;">2. Initialization & Model Loading</a></li>
+                <li><a href="#routing" style="color: var(--navy-blue); text-decoration: none;">3. Routing</a></li>
+                <li><a href="#prediction" style="color: var(--navy-blue); text-decoration: none;">4. Prediction Logic</a></li>
+                <li><a href="#feature-engineering" style="color: var(--navy-blue); text-decoration: none;">5. Feature Engineering</a></li>
+                <li><a href="#predict-proba" style="color: var(--navy-blue); text-decoration: none;">6. predict_proba() Explained</a></li>
+                <li><a href="#flow" style="color: var(--navy-blue); text-decoration: none;">7. Complete Flow</a></li>
+            </ul>
+        </div>
+
+        <!-- Section 1: Library Imports -->
+        <div class="content-section" id="imports">
+            <h2>1. Library Imports</h2>
+            <div class="code-block">
+<code><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, request
+<span class="keyword">import</span> joblib
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">import</span> os</code>
+            </div>
+
+            <h3>What Each Library Does:</h3>
+            
+            <div class="info-box" style="margin: 1rem 0;">
+                <h4>🔵 Flask</h4>
+                <p>Our web framework that helps us create a web server:</p>
+                <ul>
+                    <li><strong>Flask</strong>: Creates the web application</li>
+                    <li><strong>render_template</strong>: Displays HTML pages to users</li>
+                    <li><strong>request</strong>: Gets data from forms that users submit</li>
+                </ul>
+            </div>
+
+            <div class="info-box" style="margin: 1rem 0;">
+                <h4>📦 joblib</h4>
+                <p>Used to load our pre-trained Machine Learning model. Think of it as opening a saved file that contains all the "knowledge" our model learned during training.</p>
+            </div>
+
+            <div class="info-box" style="margin: 1rem 0;">
+                <h4>🐼 pandas</h4>
+                <p>A powerful library for organizing data. We use it to create a DataFrame (like an Excel spreadsheet) that our model can understand.</p>
+            </div>
+
+            <div class="info-box" style="margin: 1rem 0;">
+                <h4>💻 os</h4>
+                <p>Operating system library. We use it to find the correct file path to our model, so the code works on any computer.</p>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Why This Matters:</strong> These imports give us all the tools we need to create a web application that can receive user input, process it, and return predictions.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Initialization & Model Loading -->
+        <div class="content-section" id="initialization">
+            <h2>2. Initialization & Model Loading</h2>
+            <div class="code-block">
+<code><span class="comment"># Create Flask application</span>
+app = Flask(__name__)
+
+<span class="comment"># Smart path loading (works anywhere)</span>
+current_dir = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(current_dir, <span class="string">'credit_risk_model.pkl'</span>)
+model = joblib.load(model_path)</code>
+            </div>
+
+            <h3>Step-by-Step Breakdown:</h3>
+            <ol>
+                <li>
+                    <strong>app = Flask(__name__)</strong>: Creates our Flask web application. This is like starting a new website.
+                </li>
+                <li>
+                    <strong>Finding the Model File:</strong>
+                    <ul>
+                        <li><code>os.path.abspath(__file__)</code>: Gets the full path of the current file (app.py)</li>
+                        <li><code>os.path.dirname(...)</code>: Gets the folder where app.py is located</li>
+                        <li><code>os.path.join(...)</code>: Combines the folder path with the model filename</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>model = joblib.load(model_path)</strong>: Loads the trained Random Forest model from the file.
+                </li>
+            </ol>
+
+            <div class="highlight-box">
+                <h3>💡 Why This Matters</h3>
+                <ul>
+                    <li>We load the model <strong>once</strong> when the server starts, not every time someone makes a prediction</li>
+                    <li>This makes our application much faster!</li>
+                    <li>The smart path handling ensures the code works whether you run it locally or deploy it to a server</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Important Note:</strong> The model file (<code>credit_risk_model.pkl</code>) must be in the same folder as <code>app.py</code> for this to work.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Routing -->
+        <div class="content-section" id="routing">
+            <h2>3. Routing</h2>
+            <p>Routes are like different "pages" or "endpoints" in our web application. Each route handles a specific type of request.</p>
+
+            <h3>Route 1: Home Page</h3>
+            <div class="code-block">
+<code><span class="keyword">@app.route</span>(<span class="string">'/'</span>)
+<span class="keyword">def</span> <span class="function">home</span>():
+    <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>)</code>
+            </div>
+            <div class="info-box">
+                <p><strong>What This Does:</strong></p>
+                <ul>
+                    <li><code>@app.route('/')</code>: This decorator tells Flask: "When someone visits the homepage, run this function"</li>
+                    <li><code>render_template('index.html')</code>: Finds and displays the HTML file that contains our loan application form</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Why This Matters:</strong> This is how users see the form where they can enter loan applicant information.</p>
+            </div>
+
+            <h3>Route 2: Prediction Endpoint</h3>
+            <div class="code-block">
+<code><span class="keyword">@app.route</span>(<span class="string">'/predict'</span>, methods=[<span class="string">'POST'</span>])
+<span class="keyword">def</span> <span class="function">predict</span>():
+    <span class="comment"># ... prediction logic here ...</span></code>
+            </div>
+            <div class="info-box">
+                <p><strong>What This Does:</strong></p>
+                <ul>
+                    <li><code>@app.route('/predict')</code>: Creates a route at <code>/predict</code></li>
+                    <li><code>methods=['POST']</code>: Only accepts POST requests (when users submit the form)</li>
+                    <li>This is where all the prediction magic happens!</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Why This Matters:</strong> When a user clicks "Submit" on the form, their browser sends a POST request to <code>/predict</code> with all the form data. This function processes it and returns the prediction.</p>
+            </div>
+        </div>
+
+        <!-- Section 4: Prediction Logic -->
+        <div class="content-section" id="prediction">
+            <h2>4. Prediction Logic - Step by Step</h2>
+            <p>This is the heart of our application! Let's break it down step by step:</p>
+
+            <h3>Step 1: Receive Data from the Form</h3>
+            <div class="code-block">
+<code>person_age = float(request.form[<span class="string">'person_age'</span>])
+person_income = float(request.form[<span class="string">'person_income'</span>])
+person_emp_length = float(request.form[<span class="string">'person_emp_length'</span>])
+loan_amnt = float(request.form[<span class="string">'loan_amnt'</span>])
+loan_int_rate = float(request.form[<span class="string">'loan_int_rate'</span>])
+cb_person_cred_hist_length = float(request.form[<span class="string">'cb_person_cred_hist_length'</span>])</code>
+            </div>
+            <div class="info-box">
+                <p><strong>What This Does:</strong></p>
+                <ul>
+                    <li><code>request.form</code>: Gets all the data from the HTML form</li>
+                    <li><code>['person_age']</code>: Extracts the specific field (must match the <code>name</code> attribute in HTML)</li>
+                    <li><code>float(...)</code>: Converts text input to a number</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Why This Matters:</strong> We need to convert the form data (which comes as text) into numbers that our model can understand.</p>
+            </div>
+
+            <h3>Step 2: Receive Text Data (Dropdowns)</h3>
+            <div class="code-block">
+<code>person_home_ownership = request.form.get(<span class="string">'person_home_ownership'</span>, <span class="string">'RENT'</span>)
+loan_intent = request.form.get(<span class="string">'loan_intent'</span>, <span class="string">'PERSONAL'</span>)
+loan_grade = request.form.get(<span class="string">'loan_grade'</span>, <span class="string">'A'</span>)
+cb_person_default_on_file = request.form.get(<span class="string">'cb_person_default_on_file'</span>, <span class="string">'N'</span>)</code>
+            </div>
+            <div class="info-box">
+                <p><strong>What This Does:</strong></p>
+                <ul>
+                    <li><code>.get()</code>: Safely gets the value, with a default if it's missing</li>
+                    <li>The second parameter (like <code>'RENT'</code>) is the default value if the field is empty</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Why This Matters:</strong> Prevents errors if a dropdown field is missing and provides sensible defaults.</p>
+            </div>
+        </div>
+
+        <!-- Section 5: Feature Engineering -->
+        <div class="content-section" id="feature-engineering">
+            <h2>5. Feature Engineering - The Smart Calculations ⭐</h2>
+            <div class="code-block">
+<code><span class="comment"># Feature Engineering</span>
+<span class="keyword">if</span> person_income > <span class="string">0</span>:
+    loan_percent_income = loan_amnt / person_income
+    interest_burden = (loan_amnt * (loan_int_rate / <span class="string">100</span>)) / person_income
+<span class="keyword">else</span>:
+    loan_percent_income = <span class="string">0</span>
+    interest_burden = <span class="string">0</span></code>
+            </div>
+
+            <div class="highlight-box">
+                <h3>🔑 What is Feature Engineering?</h3>
+                <p>Feature engineering means creating new, meaningful features from existing data. Instead of just using raw numbers, we calculate relationships that help the model make better predictions.</p>
+            </div>
+
+            <h3>Understanding interest_burden</h3>
+            <p><strong>The Formula:</strong></p>
+            <div class="code-block" style="background: rgba(80, 200, 120, 0.1); border-left: 4px solid var(--emerald-green);">
+<code>interest_burden = (loan_amnt × (loan_int_rate / 100)) / person_income</code>
+            </div>
+
+            <h4>Breaking Down the Formula:</h4>
+            <ol>
+                <li><code>loan_int_rate / 100</code>: Converts percentage to decimal (e.g., 5% becomes 0.05)</li>
+                <li><code>loan_amnt × (loan_int_rate / 100)</code>: Calculates the annual interest amount</li>
+                <li>Divide by <code>person_income</code>: Shows what percentage of income goes to interest</li>
+            </ol>
+
+            <div class="info-box">
+                <h4>📊 Real Example:</h4>
+                <ul>
+                    <li>Loan amount: <strong>$10,000</strong></li>
+                    <li>Interest rate: <strong>5%</strong></li>
+                    <li>Annual income: <strong>$50,000</strong></li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Calculation:</strong></p>
+                <ul>
+                    <li>Annual interest = $10,000 × (5 / 100) = <strong>$500</strong></li>
+                    <li>Interest burden = $500 / $50,000 = <strong>0.01</strong> (or <strong>1%</strong> of income)</li>
+                </ul>
+                <p style="margin-top: 1rem; color: var(--emerald-green); font-weight: 600;">
+                    ✅ Lower interest burden = Lower risk of default!
+                </p>
+            </div>
+
+            <h3>Understanding loan_percent_income</h3>
+            <div class="code-block" style="background: rgba(80, 200, 120, 0.1); border-left: 4px solid var(--emerald-green);">
+<code>loan_percent_income = loan_amnt / person_income</code>
+            </div>
+            <div class="info-box">
+                <p><strong>What It Shows:</strong> What percentage of annual income the loan amount represents.</p>
+                <p style="margin-top: 1rem;"><strong>Example:</strong> If someone wants a $25,000 loan and earns $50,000/year:</p>
+                <ul>
+                    <li><code>loan_percent_income = $25,000 / $50,000 = 0.5</code> (or <strong>50%</strong>)</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Why This Matters:</strong> A loan that's 50% of someone's annual income is riskier than one that's 10%.</p>
+            </div>
+        </div>
+
+        <!-- Section 6: Data Preparation -->
+        <div class="content-section">
+            <h2>6. Prepare Data in DataFrame Format</h2>
+            <div class="code-block">
+<code>input_data = pd.DataFrame({
+    <span class="string">'person_age'</span>: [person_age],
+    <span class="string">'person_income'</span>: [person_income],
+    <span class="string">'person_home_ownership'</span>: [person_home_ownership],
+    <span class="string">'person_emp_length'</span>: [person_emp_length],
+    <span class="string">'loan_intent'</span>: [loan_intent],
+    <span class="string">'loan_grade'</span>: [loan_grade],
+    <span class="string">'loan_amnt'</span>: [loan_amnt],
+    <span class="string">'loan_int_rate'</span>: [loan_int_rate],
+    <span class="string">'loan_percent_income'</span>: [loan_percent_income],
+    <span class="string">'cb_person_default_on_file'</span>: [cb_person_default_on_file],
+    <span class="string">'cb_person_cred_hist_length'</span>: [cb_person_cred_hist_length],
+    <span class="string">'interest_burden'</span>: [interest_burden]
+})</code>
+            </div>
+            <div class="info-box">
+                <p><strong>What This Does:</strong></p>
+                <ul>
+                    <li>Creates a pandas DataFrame (like a table with one row)</li>
+                    <li>Each column name must match exactly what the model expects</li>
+                    <li>The values are wrapped in <code>[...]</code> because DataFrame needs lists</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Why This Matters:</strong></p>
+                <ul>
+                    <li>Our trained model expects data in this exact format</li>
+                    <li>Column names must match what was used during training</li>
+                    <li>This is like filling out a form that the model can read</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 7: Making Predictions -->
+        <div class="content-section" id="predict-proba">
+            <h2>7. Making Predictions - predict() vs predict_proba() ⭐</h2>
+            
+            <div class="code-block">
+<code><span class="comment"># Get the prediction (answer)</span>
+prediction = model.predict(input_data)[<span class="string">0</span>]
+
+<span class="comment"># Calculate probabilities (confidence scores)</span>
+probabilities = model.predict_proba(input_data)[<span class="string">0</span>]
+
+prob_safe = probabilities[<span class="string">0</span>] * <span class="string">100</span>   <span class="comment"># Safety percentage</span>
+prob_risk = probabilities[<span class="string">1</span>] * <span class="string">100</span>   <span class="comment"># Risk percentage</span></code>
+            </div>
+
+            <h3>model.predict() - The Answer</h3>
+            <div class="info-box">
+                <p><strong>What It Does:</strong></p>
+                <ul>
+                    <li>Returns the final prediction: <code>0</code> (SAFE) or <code>1</code> (RISKY)</li>
+                    <li><code>[0]</code> gets the first (and only) result from the array</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Example Output:</strong> <code>0</code> means "This applicant is SAFE"</p>
+            </div>
+
+            <h3>model.predict_proba() - The Confidence Score ⭐</h3>
+            <div class="highlight-box">
+                <p><strong>What It Does:</strong></p>
+                <ul>
+                    <li>Returns probabilities for each possible outcome</li>
+                    <li>For binary classification, it returns two probabilities that add up to 100%</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Example Output:</strong> <code>[0.85, 0.15]</code> means:</p>
+                <ul>
+                    <li>85% chance of being SAFE (class 0)</li>
+                    <li>15% chance of being RISKY (class 1)</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 Why This Matters:</h4>
+                <ul>
+                    <li><code>predict()</code> gives us the answer: "SAFE" or "RISKY"</li>
+                    <li><code>predict_proba()</code> tells us <strong>how confident</strong> the model is</li>
+                    <li>A 95% safety score means the model is very confident</li>
+                    <li>A 55% safety score means the model is less certain</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Real-World Example:</strong></p>
+                <ul>
+                    <li>Prediction: SAFE</li>
+                    <li>Safety Percentage: 92%</li>
+                    <li>This means: "The model is 92% confident this applicant is safe"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 8: Formatting Results -->
+        <div class="content-section">
+            <h2>8. Format and Return the Result</h2>
+            <div class="code-block">
+<code><span class="keyword">if</span> prediction == <span class="string">1</span>:
+    <span class="comment"># If risky</span>
+    res_text = f<span class="string">"⚠️ خطر! احتمالية التعثر: {prob_risk:.1f}%"</span>
+    color = <span class="string">"#e74c3c"</span> <span class="comment"># Red</span>
+<span class="keyword">else</span>:
+    <span class="comment"># If safe</span>
+    res_text = f<span class="string">"✅ عميل آمن (نسبة الأمان: {prob_safe:.1f}%)"</span>
+    color = <span class="string">"#2ecc71"</span> <span class="comment"># Green</span>
+
+<span class="keyword">return</span> render_template(<span class="string">'index.html'</span>, prediction_text=res_text, color=color)</code>
+            </div>
+            <div class="info-box">
+                <p><strong>What This Does:</strong></p>
+                <ul>
+                    <li>Checks if prediction is <code>1</code> (risky) or <code>0</code> (safe)</li>
+                    <li>Creates a user-friendly message with the percentage</li>
+                    <li>Sets a color (red for risky, green for safe)</li>
+                    <li>Sends the result back to the HTML page</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Why This Matters:</strong></p>
+                <ul>
+                    <li>Users see a clear, colored result</li>
+                    <li>The percentage helps them understand the model's confidence</li>
+                    <li>The result appears on the same page (better user experience)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 9: Error Handling -->
+        <div class="content-section">
+            <h2>9. Error Handling</h2>
+            <div class="code-block">
+<code><span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+    print(f<span class="string">"Error occurred: {e}"</span>)
+    <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>, 
+                           prediction_text=f<span class="string">"حدث خطأ: {e}"</span>, 
+                           color=<span class="string">"black"</span>)</code>
+            </div>
+            <div class="info-box">
+                <p><strong>What This Does:</strong></p>
+                <ul>
+                    <li>Catches any errors that might occur</li>
+                    <li>Prints the error to the console (for debugging)</li>
+                    <li>Shows a friendly error message to the user</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Why This Matters:</strong></p>
+                <ul>
+                    <li>Prevents the website from crashing</li>
+                    <li>Helps developers debug issues</li>
+                    <li>Provides a better user experience</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 10: Complete Flow -->
+        <div class="content-section" id="flow">
+            <h2>10. Complete Flow Summary</h2>
+            <div class="highlight-box">
+                <ol style="line-height: 2;">
+                    <li><strong>User visits homepage</strong> → Sees the loan application form</li>
+                    <li><strong>User fills out form</strong> → Enters applicant information</li>
+                    <li><strong>User clicks Submit</strong> → Browser sends POST request to <code>/predict</code></li>
+                    <li><strong>Backend receives data</strong> → Extracts all form fields</li>
+                    <li><strong>Feature engineering</strong> → Calculates <code>interest_burden</code> and <code>loan_percent_income</code></li>
+                    <li><strong>Data preparation</strong> → Organizes data into DataFrame format</li>
+                    <li><strong>Model prediction</strong> → Uses <code>predict()</code> and <code>predict_proba()</code></li>
+                    <li><strong>Result formatting</strong> → Creates user-friendly message with percentage</li>
+                    <li><strong>Return to user</strong> → Displays result on the webpage</li>
+                </ol>
+                <p style="margin-top: 1.5rem; font-size: 1.1rem; color: var(--emerald-green); font-weight: 600;">
+                    ⚡ Total Time: Usually less than 1 second!
+                </p>
+            </div>
+        </div>
+
+        <!-- Key Takeaways -->
+        <div class="content-section">
+            <h2>🎯 Key Takeaways</h2>
+            <div class="info-box">
+                <ul style="line-height: 2;">
+                    <li><strong>Model Loading:</strong> Load once at startup for speed</li>
+                    <li><strong>Feature Engineering:</strong> Calculate meaningful relationships (like <code>interest_burden</code>)</li>
+                    <li><strong>Data Format:</strong> Must match exactly what the model expects</li>
+                    <li><strong>Two Predictions:</strong> Use both <code>predict()</code> (answer) and <code>predict_proba()</code> (confidence)</li>
+                    <li><strong>Error Handling:</strong> Always include try/except for production code</li>
+                    <li><strong>User Experience:</strong> Show clear, colored results with confidence percentages</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="content-section">
+            <h2>💡 Tips for Understanding</h2>
+            <div class="highlight-box">
+                <ul style="line-height: 2;">
+                    <li><strong>Think of the model as a trained expert:</strong> It learned patterns from thousands of loan examples</li>
+                    <li><strong>Feature engineering is like asking smart questions:</strong> Instead of "What's their income?", we ask "What percentage of income goes to loan payments?"</li>
+                    <li><strong>Probabilities show confidence:</strong> 95% is very confident, 60% is uncertain</li>
+                    <li><strong>The DataFrame is like a form:</strong> The model reads it like a spreadsheet with one row</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Connect With Me</h3>
+            <p>Follow me on social media for more projects and updates</p>
+            <div class="social-links">
+                <a href="https://github.com/Tegnh" target="_blank" class="social-link github" title="GitHub">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://x.com/6ar_t" target="_blank" class="social-link twitter" title="Twitter/X">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/tarig-fdl-7a6599348/" target="_blank" class="social-link linkedin" title="LinkedIn">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Smart Credit Risk System. Built with ❤️ by Tegnh</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

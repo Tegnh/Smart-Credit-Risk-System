@@ -1,0 +1,551 @@
+/* ============================================
+   Smart Credit Risk System - Documentation
+   Modern Fintech Theme
+   ============================================ */
+
+:root {
+    --navy-blue: #001f3f;
+    --emerald-green: #50C878;
+    --clean-white: #ffffff;
+    --light-gray: #f5f7fa;
+    --dark-gray: #2c3e50;
+    --text-gray: #555;
+    --border-gray: #e0e0e0;
+    --sidebar-width: 280px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+/* ============================================
+   Sidebar Navigation
+   ============================================ */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: linear-gradient(180deg, var(--navy-blue) 0%, #003366 100%);
+    color: var(--clean-white);
+    padding: 2rem 0;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 0 2rem 2rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--clean-white);
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-header p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav li {
+    margin: 0.5rem 0;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 1rem 2rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    font-size: 0.95rem;
+}
+
+.sidebar-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left-color: var(--emerald-green);
+    color: var(--clean-white);
+    padding-left: 2.5rem;
+}
+
+.sidebar-nav a.active {
+    background-color: rgba(80, 200, 120, 0.2);
+    border-left-color: var(--emerald-green);
+    color: var(--clean-white);
+    font-weight: 600;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 3rem 4rem;
+    min-height: 100vh;
+}
+
+.page-header {
+    background: linear-gradient(135deg, var(--navy-blue) 0%, #003366 100%);
+    color: var(--clean-white);
+    padding: 3rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 15px rgba(0, 31, 63, 0.2);
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    line-height: 1.8;
+}
+
+/* ============================================
+   Content Sections
+   ============================================ */
+
+.content-section {
+    background: var(--clean-white);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.content-section h2 {
+    color: var(--navy-blue);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid var(--emerald-green);
+}
+
+.content-section h3 {
+    color: var(--navy-blue);
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.content-section p {
+    color: var(--text-gray);
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.content-section ul, .content-section ol {
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-gray);
+}
+
+.content-section li {
+    margin-bottom: 0.8rem;
+    line-height: 1.7;
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+
+.code-block {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--emerald-green);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.code-block code {
+    color: #d4d4d4;
+}
+
+.code-block .keyword {
+    color: #569cd6;
+}
+
+.code-block .string {
+    color: #ce9178;
+}
+
+.code-block .comment {
+    color: #6a9955;
+}
+
+.code-block .function {
+    color: #dcdcaa;
+}
+
+/* ============================================
+   Buttons & CTAs
+   ============================================ */
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--emerald-green);
+    color: var(--clean-white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.btn:hover {
+    background: #45b869;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(80, 200, 120, 0.3);
+}
+
+.btn-secondary {
+    background: var(--navy-blue);
+}
+
+.btn-secondary:hover {
+    background: #003366;
+    box-shadow: 0 4px 12px rgba(0, 31, 63, 0.3);
+}
+
+/* ============================================
+   Cards & Highlights
+   ============================================ */
+
+.highlight-box {
+    background: linear-gradient(135deg, rgba(80, 200, 120, 0.1) 0%, rgba(0, 31, 63, 0.05) 100%);
+    border-left: 4px solid var(--emerald-green);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+}
+
+.info-box {
+    background: rgba(0, 31, 63, 0.05);
+    border-left: 4px solid var(--navy-blue);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+}
+
+/* ============================================
+   Project Screenshot Section
+   ============================================ */
+
+.screenshot-placeholder {
+    background: var(--light-gray);
+    border: 2px dashed var(--border-gray);
+    border-radius: 8px;
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-gray);
+    margin: 2rem 0;
+}
+
+.screenshot-container {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.project-screenshot,
+.code-screenshot {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    display: block;
+    margin: 0 auto;
+}
+
+.project-screenshot {
+    border: 2px solid var(--border-gray);
+}
+
+.code-screenshot {
+    border: 2px solid var(--navy-blue);
+    max-width: 90%;
+}
+
+@media (max-width: 768px) {
+    .project-screenshot,
+    .code-screenshot {
+        max-width: 100%;
+    }
+}
+
+/* ============================================
+   FAQ Section
+   ============================================ */
+
+.faq-item {
+    background: var(--clean-white);
+    border: 1px solid var(--border-gray);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.faq-question {
+    background: var(--navy-blue);
+    color: var(--clean-white);
+    padding: 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    position: relative;
+}
+
+.faq-question:hover {
+    background: #003366;
+}
+
+.faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 1.25rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    transition: transform 0.3s ease;
+}
+
+.faq-question.active::after {
+    content: '−';
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 1.5rem;
+    color: var(--text-gray);
+    line-height: 1.8;
+    display: none;
+    border-top: 1px solid var(--border-gray);
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 2rem 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .content-section {
+        padding: 1.5rem;
+    }
+
+    .mobile-menu-toggle {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1001;
+        background: var(--navy-blue);
+        color: var(--clean-white);
+        border: none;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: var(--emerald-green);
+    color: var(--clean-white);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0.25rem;
+}
+
+/* ============================================
+   Footer Styles
+   ============================================ */
+
+.footer {
+    background: linear-gradient(180deg, var(--navy-blue) 0%, #001529 100%);
+    color: var(--clean-white);
+    padding: 3rem 2rem 2rem;
+    margin-top: 4rem;
+    border-top: 3px solid var(--emerald-green);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer h3 {
+    color: var(--clean-white);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.footer p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--clean-white);
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.social-link svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+}
+
+.social-link span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+    background: var(--emerald-green);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 6px 20px rgba(80, 200, 120, 0.5);
+    border-color: var(--emerald-green);
+}
+
+.social-link:hover svg {
+    transform: scale(1.15);
+}
+
+.social-link:hover span {
+    transform: scale(1.2);
+}
+
+.social-link.github:hover {
+    background: #24292e;
+    border-color: #24292e;
+    box-shadow: 0 4px 12px rgba(36, 41, 46, 0.4);
+}
+
+.social-link.twitter:hover {
+    background: #1da1f2;
+    border-color: #1da1f2;
+    box-shadow: 0 4px 12px rgba(29, 161, 242, 0.4);
+}
+
+.social-link.linkedin:hover {
+    background: #0077b5;
+    border-color: #0077b5;
+    box-shadow: 0 4px 12px rgba(0, 119, 181, 0.4);
+}
+
+.footer-bottom {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 2rem 1.5rem 1.5rem;
+    }
+    
+    .social-links {
+        gap: 1rem;
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+}
