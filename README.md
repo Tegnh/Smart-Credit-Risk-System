@@ -103,5 +103,7 @@ Edit the CSS variables in `styles.css`:
 For questions or issues, please refer to the FAQ page or check the project documentation.
 
 ---
-
+this is link of website :
+https://tegnh.github.io/Smart-Credit-Risk-System/
 **Built with ❤️ for the Smart Credit Risk System project**
+
